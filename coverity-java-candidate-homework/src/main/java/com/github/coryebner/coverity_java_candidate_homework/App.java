@@ -1,9 +1,7 @@
 package com.github.coryebner.coverity_java_candidate_homework;
 
-import javax.swing.plaf.OptionPaneUI;
-
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
+import java.beans.Expression;
+import java.util.Stack;
 
 /**
  * Hello world!
@@ -28,14 +26,54 @@ public class App
     	System.out.println(equation);
     	System.out.println(verbose);
     	
+    	System.out.println(expressionParser(equation));
     	
-//    	System.out.println("Argument one is " + args[0]);
-//    	
-//    	String[] split = args[0].split("\\(", 2);
-//    	
-//    	for(int i=0; i<split.length; i++){
-//    		System.out.println(split[i]);
-//    	}
+/*    	System.out.println(mult(add(2,2), div(9, 3)));
+    	
+    	System.out.println("Argument one is " + args[0]);
+    	
+    	String[] split = equation.split("\\)", 2);
+    	
+    	for(int i=0; i<split.length; i++){
+    		System.out.println(split[i]);
+    	}*/
+    }
+    
+    private static int expressionParser(String expression){
+    	int result = 0;
+    	String subExpression = "";
+    	int bracketCount = 0;
+    	String regexp = "[\\(+,]";
+    	
+    	String[] split = expression.split(regexp, 2);
+    	System.out.println(split[0]);
+    	System.out.println(split[1]);
+    	
+    	//if(split[0]))
+    	
+    	switch(split[0]){
+    		case "add":
+    			break;
+    		case "sub":
+    			break;
+    		case "mult":
+    			expressionParser(split[1]);
+    			break;
+    		case "div":
+    			break;
+    		case "let":
+    			break;
+    		default:
+    			System.out.println("Not a valid expression");
+    	}
+    	
+    	return result;
+    }
+    
+    private int let(String var, int value, String equation){
+    	int result = 0;
+    	
+    	return result;
     }
     
     /**
@@ -44,7 +82,7 @@ public class App
      * @param b integer to divide a by.
      * @return
      */
-    private int div(int a, int b){
+    private static int div(int a, int b){
     	return a/b;
     }
     
@@ -54,7 +92,7 @@ public class App
      * @param b The second integer
      * @return
      */
-    private int mult(int a, int b){
+    private static int mult(int a, int b){
     	return a*b;
     }
     
@@ -74,7 +112,7 @@ public class App
      * @param b The second integer to be added together
      * @return	The sum of the addition.
      */
-    private int add(int a, int b){
+    private static int add(int a, int b){
 		return a + b;
     }
 }
