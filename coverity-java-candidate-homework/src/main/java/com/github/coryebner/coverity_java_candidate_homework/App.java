@@ -39,6 +39,16 @@ public class App
     }
     
     /**
+     * Subtracts integer a from integer b and returns the result
+     * @param a integer to subtract from
+     * @param b integer to subtract
+     * @return
+     */
+    private int sub(int a, int b){
+    	return a-b;
+    }
+    
+    /**
      * Adds two Integers together and returns the result.
      * @param a The first Integer to be added together
      * @param b The second integer to be added together
