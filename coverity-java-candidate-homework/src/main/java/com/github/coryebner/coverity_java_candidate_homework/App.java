@@ -39,6 +39,16 @@ public class App
     }
     
     /**
+     * Divides integer a by integer b and returns the result
+     * @param a integer to divide
+     * @param b integer to divide a by.
+     * @return
+     */
+    private int div(int a, int b){
+    	return a/b;
+    }
+    
+    /**
      * Multiplies two integers together and returns the result
      * @param a The first Integer
      * @param b The second integer
