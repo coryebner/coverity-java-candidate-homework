@@ -38,9 +38,13 @@ public class App
 //    	}
     }
     
-    
-    
-    public int add(int a, int b){
+    /**
+     * Adds two Integers together and returns the result.
+     * @param a The first Integer to be added together
+     * @param b The second integer to be added together
+     * @return	The sum of the addition.
+     */
+    private int add(int a, int b){
 		return a + b;
     }
 }
