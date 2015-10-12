@@ -1,5 +1,10 @@
 package com.github.coryebner.coverity_java_candidate_homework;
 
+import javax.swing.plaf.OptionPaneUI;
+
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+
 /**
  * Hello world!
  *
@@ -8,6 +13,34 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+    	String equation = "";
+    	String verbose = "";
+
+    	for(int i=0; i < args.length; i++){
+    		if(args[i].startsWith("-"))
+    			break;
+    		equation += args[i];
+    	}
+    	
+    	if(args[args.length-1].startsWith("-")){
+    		verbose = args[args.length-1];
+    	}
+    	System.out.println(equation);
+    	System.out.println(verbose);
+    	
+    	
+//    	System.out.println("Argument one is " + args[0]);
+//    	
+//    	String[] split = args[0].split("\\(", 2);
+//    	
+//    	for(int i=0; i<split.length; i++){
+//    		System.out.println(split[i]);
+//    	}
+    }
+    
+    
+    
+    public int add(int a, int b){
+		return a + b;
     }
 }
