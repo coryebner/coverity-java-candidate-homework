@@ -39,6 +39,16 @@ public class App
     }
     
     /**
+     * Multiplies two integers together and returns the result
+     * @param a The first Integer
+     * @param b The second integer
+     * @return
+     */
+    private int mult(int a, int b){
+    	return a*b;
+    }
+    
+    /**
      * Subtracts integer a from integer b and returns the result
      * @param a integer to subtract from
      * @param b integer to subtract
