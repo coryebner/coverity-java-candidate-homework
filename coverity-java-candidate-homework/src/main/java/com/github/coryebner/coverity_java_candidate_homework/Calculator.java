@@ -7,7 +7,7 @@ import java.util.Stack;
  * Hello world!
  *
  */
-public class App 
+public class Calculator 
 {
     public static void main( String[] args )
     {
