@@ -1,8 +1,5 @@
 package com.github.coryebner.coverity_java_candidate_homework;
 
-import java.beans.Expression;
-import java.util.Stack;
-
 /**
  * Hello world!
  *

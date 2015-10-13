@@ -5,13 +5,7 @@ public class calculations{
 	public calculations() {
 	}
 	
-	private int let(String var, int value, String equation){
-    	int result = 0;
-    	
-    	return result;
-    }
-    
-    /**
+	/**
      * Divides integer a by integer b and returns the result
      * @param a integer to divide
      * @param b integer to divide a by.

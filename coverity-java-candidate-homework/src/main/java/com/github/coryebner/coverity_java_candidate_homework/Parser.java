@@ -1,6 +1,5 @@
 package com.github.coryebner.coverity_java_candidate_homework;
 
-import java.util.Scanner;
 import java.util.Stack;
 
 public class Parser{
@@ -14,7 +13,6 @@ public class Parser{
 	}
 	
 	public void parse(String s){
-		int pos = 0;
 		calculations calc = new calculations();
 		
 		String[] split = s.trim().split(REGEX);
@@ -88,12 +86,11 @@ public class Parser{
 			System.out.println("temporarily removing value " + top + " from the value stack");
 			System.out.println("popped " + values.peek() + " from the value stack");
 			values.pop();
+			System.out.println("popped " + values.peek() + " from the value stack");
+			values.pop();
 			System.out.println("adding value " + top + " back to the value stack");
 			values.push(top);
 		} else {
-
-			System.out.println("after let");
-
 			b = values.pop();
 			a = values.pop();
 
