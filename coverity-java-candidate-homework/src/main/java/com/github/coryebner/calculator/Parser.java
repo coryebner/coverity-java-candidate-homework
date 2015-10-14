@@ -59,7 +59,7 @@ public class Parser{
     			}
     			log.fine("popped " + operations.peek() + " from the operations stack");
     			operations.pop(); // remove (
-    			performOperand(); // perform the operation before (
+    			performOperand(); // perform the operation that is before (
     		}else if(split[i].matches("mult|add|sub|div|let")){
     			while(!operations.isEmpty() && 
     					(calc.operationPrescendence(split[i]) 
