@@ -1,4 +1,4 @@
-package com.github.coryebner.coverity_java_candidate_homework;
+package com.github.coryebner.calculator;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
