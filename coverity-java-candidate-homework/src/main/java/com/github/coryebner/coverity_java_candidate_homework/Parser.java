@@ -1,6 +1,5 @@
 package com.github.coryebner.coverity_java_candidate_homework;
 
-import java.util.Scanner;
 import java.util.Stack;
 
 public class Parser{
@@ -14,7 +13,6 @@ public class Parser{
 	}
 	
 	public void parse(String s){
-		int pos = 0;
 		calculations calc = new calculations();
 		
 		String[] split = s.trim().split(REGEX);
