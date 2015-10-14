@@ -2,6 +2,12 @@ package com.github.coryebner.calculator;
 
 import java.util.Stack;
 
+/**
+ * Parser to parse an equation, compute the result and then print it to the screen
+ * 
+ * @author Cory Ebner
+ *
+ */
 public class Parser{
 	private static final String REGEX = "(?=[\\(\\),])|(?<=[\\(\\),])";
 	private Stack<String> operations;
@@ -12,10 +18,18 @@ public class Parser{
 		this.values = new Stack<>();
 	}
 	
-	public void parse(String s){
+	/**
+	 * Takes an equation and parses it, solving it as it goes along.
+	 * This method is based upon code written by Prashant Gautam posted at
+	 * http://stackoverflow.com/a/32652277
+	 * Original Thread: http://stackoverflow.com/questions/3422673/evaluating-a-math-expression-given-in-string-form
+	 * 
+	 * @param equation The equation to solve
+	 */
+	public void parse(String equation){
 		calculations calc = new calculations();
 		
-		String[] split = s.trim().split(REGEX);
+		String[] split = equation.trim().split(REGEX);
 		
 		//System.out.println("Printing splits");
 		for(int i=0; i < split.length; i++){
@@ -58,19 +72,33 @@ public class Parser{
 		while(!operations.empty()){
 			performOperand();
 		}
-		System.out.println(values.pop());
+		System.out.println(values.peek());
 	}
 	
+	/**
+	 * Checks to see if the given string is numeric.
+	 * 
+	 * @param str
+	 * @return true if the string is numeric, otherwise false
+	 */
 	private static boolean isNumeric(String str)
 	{
 	  return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
 	}
 	
-	public boolean isCharString(String s) {
+	/**
+	 * Checks to see if the string consists of just characters (a-z or A-Z)
+	 * @param s
+	 * @return
+	 */
+	private boolean isCharString(String s) {
 	    return s.matches("[a-zA-Z]+");
 	}
 	
-	public void performOperand() {
+	/**
+	 * performs the operation at the top of the operations stack.
+	 */
+	private void performOperand() {
 		calculations calc = new calculations();
 
 		String operation = operations.pop();
@@ -163,6 +191,9 @@ public class Parser{
 		}
 	}
     
+	/**
+	 * Prints the current state of the operation and value stack
+	 */
     private void printStacks(){
     	System.out.print("operators:");
     	for(int i=0; i<operations.size(); i++){

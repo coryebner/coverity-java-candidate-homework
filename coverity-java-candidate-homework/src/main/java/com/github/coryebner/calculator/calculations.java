@@ -12,6 +12,10 @@ public class calculations{
      * @return
      */
     public int div(int a, int b){
+    	if(b == 0){
+    		System.out.println("Cannot divide by zero, Program terminating.");
+    		System.exit(0);
+    	}
     	return Math.floorDiv(a, b);
     }
     
@@ -45,12 +49,17 @@ public class calculations{
     	return Math.addExact(a, b);
     }
     
-    public int operationPrescendence(String s){
-    	if(s.equals("("))
+    /**
+     * Gets the prescendence of the given operation
+     * @param op The operation
+     * @return
+     */
+    public int operationPrescendence(String op){
+    	if(op.equals("("))
     		return 6;
-    	else if(s.equals("div|mult"))
+    	else if(op.equals("div|mult"))
     		return 4;
-    	else if(s.equals("add|sub"))
+    	else if(op.equals("add|sub"))
     		return 2;
     	return 0;
     }
