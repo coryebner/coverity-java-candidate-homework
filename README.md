@@ -12,6 +12,7 @@ In the target/ directory containing calculator-0.0.1-SNAPSHOT.jar type:
 java –jar calculator-0.0.1-SNAPSHOT.jar <expression to calculate> <verbosity>
 
 Example:
+
 java -jar calculator-0.0.1-SNAPSHOT.jar add(2,2)
 or
 java -jar calculator-0.0.1-SNAPSHOT.jar mult(2,2) –INFO
