@@ -1,6 +1,7 @@
 package com.github.coryebner.calculator;
 
 import java.util.Stack;
+import java.util.logging.Logger;
 
 /**
  * Parser to parse an equation, compute the result and then print it to the screen
@@ -12,6 +13,7 @@ public class Parser{
 	private static final String REGEX = "(?=[\\(\\),])|(?<=[\\(\\),])";
 	private Stack<String> operations;
 	private Stack<String> values;
+	private Logger log = Logger.getLogger("myLogger");
 	
 	Parser(){
 		this.operations = new Stack<>();
@@ -31,24 +33,31 @@ public class Parser{
 		
 		String[] split = equation.trim().split(REGEX);
 		
-		//System.out.println("Printing splits");
 		for(int i=0; i < split.length; i++){
 			split[i] = split[i].trim();
-			//System.out.print("Split " + i + ": ");
-    		//System.out.println(split[i]);
     		
     		if(isNumeric(split[i])){
     			values.push(split[i]);
-    			System.out.println("pushed " + split[i] + " to values stack");
+    			log.fine("pushed " + split[i] + " to values stack");
     		}else if(split[i].equals("(")){
+    			if(operations.isEmpty() || operations.peek().equals("(")){
+    				log.severe("Invalid expression: too many ( brackets");
+    				System.out.println("Invalid expression: too many ( brackets");
+    				System.exit(0);
+    			}
     			operations.push(split[i]);
-    			System.out.println("pushed " + split[i] + " to operations stack");
+    			log.fine("pushed " + split[i] + " to operations stack");
     		}else if(split[i].equals(")")){
-    			System.out.println("Reached )");
+    			log.fine("Reached )");
+    			if(operations.isEmpty()){
+    				log.severe("Invalid expression: uneven amount of brackets");
+    				System.out.println("Invalid expression: uneven amount of brackets");
+    				System.exit(0);
+    			}
     			while(!operations.peek().equals("(")){    				
     				performOperand();
     			}
-    			System.out.println("popped " + operations.peek() + " from the operations stack");
+    			log.fine("popped " + operations.peek() + " from the operations stack");
     			operations.pop(); // remove (
     			performOperand(); // perform the operation before (
     		}else if(split[i].matches("mult|add|sub|div|let")){
@@ -58,20 +67,25 @@ public class Parser{
     				performOperand();
     			}
     			operations.push(split[i]);
-    			System.out.println("pushed " + split[i] + " to the operations stack");
+    			log.fine("pushed " + split[i] + " to the operations stack");
     		}else if(isCharString(split[i])){
     			values.push(split[i]);
-    			System.out.println("pushed " + split[i] + " to the value stack");
+    			log.fine("pushed " + split[i] + " to the value stack");
     		}else if(split[i].equals(",")){
-    
+    			log.fine("Found ,   moving to next element");
     		}
     		else{
-    			System.out.println("invalid expression: " + split[i]);
+    			log.severe("invalid expression: " + split[i]);
+    			log.severe("Terminating Program ");
+    			System.out.println("invalid expression: " + split[i] + "\n Terminating Program ");
+    			System.exit(0);
     		}
     	}
 		while(!operations.empty()){
 			performOperand();
 		}
+		
+		log.info("Answer = " + values.peek());
 		System.out.println(values.peek());
 	}
 	
@@ -109,34 +123,32 @@ public class Parser{
 		// printStacks();
 
 		if (operation.equals("let")) {
-			System.out.println("Found let operation");
+			log.fine("Found let operation");
 			String top = values.pop();
-			System.out.println("temporarily removing value " + top + " from the value stack");
-			System.out.println("popped " + values.peek() + " from the value stack");
+			log.fine("temporarily removing value " + top + " from the value stack");
+			log.fine("popped " + values.peek() + " from the value stack");
 			values.pop();
-			System.out.println("adding value " + top + " back to the value stack");
+			log.fine("adding value " + top + " back to the value stack");
 			values.push(top);
 		} else {
-
-			System.out.println("after let");
 
 			b = values.pop();
 			a = values.pop();
 
-			System.out.println("Removed " + operation + " from the operation stack");
-			System.out.println("removed " + b + " and " + a + " from the values stack");
+			log.fine("Removed " + operation + " from the operation stack");
+			log.fine("removed " + b + " and " + a + " from the values stack");
 
 			if (isCharString(b)) {
 				temp = b;
 				b = values.peek();
-				System.out.println("Setting " + temp + " to " + b);
+				log.fine("Setting " + temp + " to " + b);
 				if (temp.equals(a)) {
 					a = b;
 				}
 			} else if (isCharString(a)) {
 				temp = a;
 				a = values.peek();
-				System.out.println("Setting " + temp + " to " + a);
+				log.fine("Setting " + temp + " to " + a);
 				if (temp.equals(b))
 					b = a;
 			}
@@ -173,7 +185,7 @@ public class Parser{
 				}
 			}
 			
-			System.out.println("Performing " + operation + " with " + a + " and " + b);
+			log.fine("Performing " + operation + " with " + a + " and " + b);
 
 			if (operation.equals("mult")) {
 				result = String.valueOf((calc.mult(Integer.valueOf(a), Integer.valueOf(b))));
@@ -186,7 +198,7 @@ public class Parser{
 			} else if (operation.equals("let")) {
 
 			}
-			System.out.println("Pushed result " + result + " to the values stack");
+			log.fine("Pushed result " + result + " to the values stack");
 			values.push(result);
 		}
 	}
